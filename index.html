@@ -14,6 +14,7 @@
         <a href="#sobre">Sobre</a>
         <a href="#cavalos">Cavalos</a>
         <a href="#cuidados">Cuidados</a>
+        <a href="#simulador">Simulador</a>
         <a href="#contato">Contato</a>
       </div>
     </nav>
@@ -93,6 +94,48 @@
         <div>🦶 Cuidado com os cascos</div>
         <div>🏃 Exercícios regulares</div>
         <div>🩺 Acompanhamento veterinário</div>
+      </div>
+    </section>
+
+    <section id="simulador" class="section simulator">
+      <p class="subtitle center">Interativo</p>
+      <h2 class="center">Simulador de cuidados</h2>
+      <p class="simulator-text">
+        Escolha Carlos ou Augusto e cuide dele. Dê água, comida, escove, limpe a baia e leve para passear para aumentar a felicidade.
+      </p>
+
+      <div class="simulator-box">
+        <div class="horse-panel">
+          <div class="horse-avatar" id="horseAvatar">🐴</div>
+          <h3 id="horseName">Carlos</h3>
+          <p id="horseMood">Carlos está esperando seus cuidados.</p>
+
+          <div class="horse-select">
+            <button type="button" class="select-horse active" data-horse="Carlos">Carlos</button>
+            <button type="button" class="select-horse" data-horse="Augusto">Augusto</button>
+          </div>
+        </div>
+
+        <div class="actions-panel">
+          <div class="happiness-label">
+            <strong>Felicidade</strong>
+            <span id="happinessValue">50%</span>
+          </div>
+          <div class="happiness-bar">
+            <div id="happinessFill"></div>
+          </div>
+
+          <div class="care-actions">
+            <button type="button" data-care="agua">💧 Dar água</button>
+            <button type="button" data-care="comida">🌾 Alimentar</button>
+            <button type="button" data-care="escovar">🪮 Escovar</button>
+            <button type="button" data-care="baia">🧹 Limpar baia</button>
+            <button type="button" data-care="passeio">🏃 Passear</button>
+            <button type="button" id="resetCare">🔄 Reiniciar</button>
+          </div>
+
+          <p class="care-message" id="careMessage">Dica: cuide bem para chegar a 100% de felicidade!</p>
+        </div>
       </div>
     </section>
 

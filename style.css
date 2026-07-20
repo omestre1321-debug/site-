@@ -207,6 +207,112 @@ h2 {
   font-weight: bold;
 }
 
+.simulator-text {
+  max-width: 760px;
+  margin: 14px auto 32px;
+  text-align: center;
+  color: #715f51;
+}
+
+.simulator-box {
+  display: grid;
+  grid-template-columns: .8fr 1.2fr;
+  gap: 24px;
+  background: white;
+  border-radius: 28px;
+  padding: 28px;
+  box-shadow: 0 18px 40px rgba(89, 48, 17, .14);
+}
+
+.horse-panel,
+.actions-panel {
+  background: #fffaf2;
+  border: 1px solid #ead4b8;
+  border-radius: 22px;
+  padding: 24px;
+}
+
+.horse-panel {
+  text-align: center;
+}
+
+.horse-avatar {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 12px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 4rem;
+  background: linear-gradient(135deg, #f4b942, #fff0c9);
+}
+
+.horse-panel h3 {
+  color: #754117;
+  font-size: 2.2rem;
+}
+
+.horse-panel p,
+.care-message {
+  color: #715f51;
+}
+
+.horse-select,
+.care-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.horse-select {
+  justify-content: center;
+}
+
+.select-horse {
+  background: #ead4b8;
+  box-shadow: none;
+}
+
+.select-horse.active {
+  background: #f4b942;
+}
+
+.happiness-label {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.happiness-bar {
+  height: 22px;
+  overflow: hidden;
+  background: #ead4b8;
+  border-radius: 999px;
+}
+
+#happinessFill {
+  width: 50%;
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #7bb661, #f4b942);
+  transition: width .35s ease;
+}
+
+.care-actions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.care-actions button {
+  box-shadow: none;
+}
+
+.care-message {
+  margin-top: 18px;
+  font-weight: bold;
+}
+
 .photos {
   margin-top: 30px;
   display: grid;
@@ -270,6 +376,8 @@ footer {
   .intro,
   .cards,
   .care-grid,
+  .simulator-box,
+  .care-actions,
   .photos {
     grid-template-columns: 1fr;
   }
