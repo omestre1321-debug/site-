@@ -35,22 +35,22 @@ const horses = {
     emoji: '🐴',
     happiness: 50,
     messages: {
-      agua: 'Carlos bebeu água fresquinha e ficou mais animado!',
-      comida: 'Carlos adorou o feno fresco!',
-      escovar: 'Carlos ficou bonito e relaxado depois da escovação!',
-      baia: 'A baia do Carlos está limpinha agora!',
-      passeio: 'Carlos caminhou no campo e ficou muito feliz!'
+      agua: 'Carlos bebeu água fresquinha e fez cara de influencer fitness!',
+      comida: 'Carlos atacou o feno como se fosse rodízio!',
+      escovar: 'Carlos ficou tão bonito que pediu um espelho!',
+      baia: 'A baia do Carlos está tão limpa que dá até para receber visita da sogra!',
+      passeio: 'Carlos caminhou no campo e fingiu que era protagonista de filme!'
     }
   },
   Augusto: {
     emoji: '🐎',
     happiness: 50,
     messages: {
-      agua: 'Augusto recuperou a energia com água limpa!',
-      comida: 'Augusto comeu uma maçã e adorou!',
-      escovar: 'Augusto ficou elegante depois da escovação!',
-      baia: 'A baia do Augusto ficou organizada!',
-      passeio: 'Augusto correu um pouco e ficou empolgado!'
+      agua: 'Augusto bebeu água e falou: hidratação é tudo, meu chapa!',
+      comida: 'Augusto comeu uma maçã como se fosse sobremesa de restaurante chique!',
+      escovar: 'Augusto ficou tão elegante que quase pediu gravata borboleta!',
+      baia: 'A baia do Augusto ficou organizada igual quarto antes da visita chegar!',
+      passeio: 'Augusto correu e jurou que ganhou as Olimpíadas do pasto!'
     }
   }
 };
@@ -195,3 +195,65 @@ clearLetters.addEventListener('click', () => {
 });
 
 renderSavedLetters();
+
+const funEmoji = document.querySelector('#funEmoji');
+const funTitle = document.querySelector('#funTitle');
+const funText = document.querySelector('#funText');
+const funCard = document.querySelector('.fun-card');
+const jokeButton = document.querySelector('#jokeButton');
+const nicknameButton = document.querySelector('#nicknameButton');
+const dramaButton = document.querySelector('#dramaButton');
+const danceButton = document.querySelector('#danceButton');
+
+const jokes = [
+  'Por que o cavalo entrou no Wi-Fi? Porque queria uma conexão estável no estábulo!',
+  'Carlos tentou virar cantor, mas só sabia relinchar no refrão.',
+  'Augusto não corre atrás de fofoca... ele galopa.',
+  'O cavalo foi ao psicólogo porque estava com muitos problemas de sela-estima.',
+  'Carlos disse que vai começar dieta amanhã. Hoje ainda tem feno ilimitado.'
+];
+
+const nicknames = [
+  'Carlos, o Relincho Supremo',
+  'Augusto, o Turbo do Pasto',
+  'Carlos Cenourinha 3000',
+  'Augusto Cascos de Ouro',
+  'Carlos, o Fiscal do Feno',
+  'Augusto, o Galã da Baia'
+];
+
+const dramas = [
+  'Carlos viu a cenoura acabar e ficou olhando para o horizonte por 3 horas.',
+  'Augusto perdeu uma corrida para uma borboleta e pediu revanche.',
+  'Carlos descobriu que banho não é passeio e ficou profundamente decepcionado.',
+  'Augusto queria dormir, mas uma galinha fez reunião em cima da cerca.',
+  'Carlos foi escovado do lado errado e agora exige indenização em maçãs.'
+];
+
+function randomItem(list) {
+  return list[Math.floor(Math.random() * list.length)];
+}
+
+function showFun(emoji, title, text) {
+  funEmoji.textContent = emoji;
+  funTitle.textContent = title;
+  funText.textContent = text;
+  funCard.classList.remove('dance');
+}
+
+jokeButton.addEventListener('click', () => {
+  showFun('😂', 'Piada diretamente do estábulo', randomItem(jokes));
+});
+
+nicknameButton.addEventListener('click', () => {
+  showFun('🏆', 'Novo apelido desbloqueado', randomItem(nicknames));
+});
+
+dramaButton.addEventListener('click', () => {
+  showFun('🎭', 'Drama rural urgente', randomItem(dramas));
+});
+
+danceButton.addEventListener('click', () => {
+  showFun('🐴', 'Modo dancinha ativado', 'Carlos e Augusto estão dançando como se ninguém estivesse olhando!');
+  funCard.classList.add('dance');
+});
