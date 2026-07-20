@@ -15,6 +15,7 @@
         <a href="#cavalos">Cavalos</a>
         <a href="#cuidados">Cuidados</a>
         <a href="#simulador">Simulador</a>
+        <a href="#cartinha">Cartinha</a>
         <a href="#contato">Contato</a>
       </div>
     </nav>
@@ -136,6 +137,46 @@
 
           <p class="care-message" id="careMessage">Dica: cuide bem para chegar a 100% de felicidade!</p>
         </div>
+      </div>
+    </section>
+
+    <section id="cartinha" class="section letter-section">
+      <p class="subtitle center">Mensagem especial</p>
+      <h2 class="center">Escreva uma cartinha</h2>
+      <p class="simulator-text">
+        Escolha Carlos ou Augusto, escreva uma mensagem carinhosa e veja sua cartinha aparecer na tela.
+      </p>
+
+      <div class="letter-box">
+        <form id="letterForm" class="letter-form">
+          <label>
+            Para qual cavalo?
+            <select id="letterHorse" required>
+              <option value="Carlos">Carlos</option>
+              <option value="Augusto">Augusto</option>
+            </select>
+          </label>
+
+          <label>
+            Seu nome
+            <input id="letterAuthor" type="text" placeholder="Ex: João" required />
+          </label>
+
+          <label>
+            Sua cartinha
+            <textarea id="letterText" placeholder="Escreva uma mensagem para o cavalo..." rows="5" required></textarea>
+          </label>
+
+          <button type="submit">Criar cartinha 💌</button>
+        </form>
+
+        <article class="letter-preview" id="letterPreview">
+          <div class="stamp">🐴</div>
+          <p class="letter-to">Para Carlos</p>
+          <h3>Querido Carlos,</h3>
+          <p class="letter-message">Sua cartinha vai aparecer aqui.</p>
+          <p class="letter-from">Com carinho, visitante</p>
+        </article>
       </div>
     </section>
 

@@ -1,9 +1,9 @@
-const form = document.querySelector('form');
+const contactForm = document.querySelector('#contato form');
 
-form.addEventListener('submit', (event) => {
+contactForm.addEventListener('submit', (event) => {
   event.preventDefault();
   alert('Mensagem enviada! Carlos e Augusto agradecem a visita. 🐴');
-  form.reset();
+  contactForm.reset();
 });
 
 const animatedItems = document.querySelectorAll('.card, .photos img');
@@ -109,3 +109,30 @@ resetCare.addEventListener('click', () => {
 });
 
 updateSimulator();
+
+const letterForm = document.querySelector('#letterForm');
+const letterHorse = document.querySelector('#letterHorse');
+const letterAuthor = document.querySelector('#letterAuthor');
+const letterText = document.querySelector('#letterText');
+const letterPreview = document.querySelector('#letterPreview');
+
+letterForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+
+  const horse = letterHorse.value;
+  const author = letterAuthor.value.trim();
+  const message = letterText.value.trim();
+  const emoji = horse === 'Carlos' ? '🐴' : '🐎';
+
+  letterPreview.innerHTML = `
+    <div class="stamp">${emoji}</div>
+    <p class="letter-to">Para ${horse}</p>
+    <h3>Querido ${horse},</h3>
+    <p class="letter-message"></p>
+    <p class="letter-from">Com carinho, ${author}</p>
+  `;
+
+  letterPreview.querySelector('.letter-message').textContent = message;
+  letterPreview.classList.add('pop');
+  setTimeout(() => letterPreview.classList.remove('pop'), 450);
+});
