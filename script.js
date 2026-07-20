@@ -115,6 +115,41 @@ const letterHorse = document.querySelector('#letterHorse');
 const letterAuthor = document.querySelector('#letterAuthor');
 const letterText = document.querySelector('#letterText');
 const letterPreview = document.querySelector('#letterPreview');
+const lettersList = document.querySelector('#lettersList');
+const clearLetters = document.querySelector('#clearLetters');
+
+const savedLettersKey = 'cartinhas-carlos-augusto';
+let savedLetters = JSON.parse(localStorage.getItem(savedLettersKey)) || [];
+
+function saveLetters() {
+  localStorage.setItem(savedLettersKey, JSON.stringify(savedLetters));
+}
+
+function renderSavedLetters() {
+  lettersList.innerHTML = '';
+
+  if (savedLetters.length === 0) {
+    lettersList.innerHTML = '<p class="empty-letters">Nenhuma cartinha salva ainda.</p>';
+    return;
+  }
+
+  savedLetters.slice().reverse().forEach((letter) => {
+    const card = document.createElement('article');
+    card.className = 'saved-letter-card';
+
+    const title = document.createElement('strong');
+    title.textContent = `Para ${letter.horse} — de ${letter.author}`;
+
+    const text = document.createElement('p');
+    text.textContent = letter.message;
+
+    const date = document.createElement('small');
+    date.textContent = letter.date;
+
+    card.append(title, text, date);
+    lettersList.appendChild(card);
+  });
+}
 
 letterForm.addEventListener('submit', (event) => {
   event.preventDefault();
@@ -129,10 +164,34 @@ letterForm.addEventListener('submit', (event) => {
     <p class="letter-to">Para ${horse}</p>
     <h3>Querido ${horse},</h3>
     <p class="letter-message"></p>
-    <p class="letter-from">Com carinho, ${author}</p>
+    <p class="letter-from"></p>
   `;
 
   letterPreview.querySelector('.letter-message').textContent = message;
+  letterPreview.querySelector('.letter-from').textContent = `Com carinho, ${author}`;
   letterPreview.classList.add('pop');
   setTimeout(() => letterPreview.classList.remove('pop'), 450);
+
+  savedLetters.push({
+    horse,
+    author,
+    message,
+    date: new Date().toLocaleString('pt-BR')
+  });
+
+  saveLetters();
+  renderSavedLetters();
+  letterForm.reset();
 });
+
+clearLetters.addEventListener('click', () => {
+  const confirmed = confirm('Tem certeza que deseja apagar todas as cartinhas salvas?');
+
+  if (confirmed) {
+    savedLetters = [];
+    saveLetters();
+    renderSavedLetters();
+  }
+});
+
+renderSavedLetters();
