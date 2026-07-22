@@ -257,3 +257,89 @@ danceButton.addEventListener('click', () => {
   showFun('🐴', 'Modo dancinha ativado', 'Carlos e Augusto estão dançando como se ninguém estivesse olhando!');
   funCard.classList.add('dance');
 });
+
+const memeStage = document.querySelector('#memeStage');
+const memeHorse = document.querySelector('#memeHorse');
+const memeTitle = document.querySelector('#memeTitle');
+const memeText = document.querySelector('#memeText');
+const memeButton = document.querySelector('#memeButton');
+const soundRelincho = document.querySelector('#soundRelincho');
+const soundBoing = document.querySelector('#soundBoing');
+const soundDrama = document.querySelector('#soundDrama');
+const soundTurbo = document.querySelector('#soundTurbo');
+const chaosButton = document.querySelector('#chaosButton');
+
+const memes = [
+  { emoji: '🐴', title: 'Carlos vendo a ração acabar', text: 'Ele olhou para o pote vazio e disse: fui traído pelo sistema.' },
+  { emoji: '🐎', title: 'Augusto modo turbo', text: 'Saiu correndo para buscar nada em lugar nenhum. Missão concluída.' },
+  { emoji: '🥕', title: 'Cenoura lendária apareceu', text: 'Carlos desbloqueou +99 de felicidade e +3 de fofoca no estábulo.' },
+  { emoji: '🧹', title: 'Fiscal da baia chegou', text: 'Augusto inspecionou a limpeza e deu nota: relincho aprovado.' },
+  { emoji: '🤠', title: 'Haras News urgente', text: 'Cavalo local descobre que maçã não nasce no balde. Entenda o caso.' },
+  { emoji: '🐴', title: 'Carlos filosófico', text: 'Se o feno é seco, por que minha vontade de comer ele é molhada de emoção?' }
+];
+
+function createAudioContext() {
+  return new (window.AudioContext || window.webkitAudioContext)();
+}
+
+function beep(frequency, duration, type = 'sine', volume = 0.12) {
+  const audioContext = createAudioContext();
+  const oscillator = audioContext.createOscillator();
+  const gain = audioContext.createGain();
+
+  oscillator.type = type;
+  oscillator.frequency.setValueAtTime(frequency, audioContext.currentTime);
+  gain.gain.setValueAtTime(volume, audioContext.currentTime);
+  gain.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + duration);
+
+  oscillator.connect(gain);
+  gain.connect(audioContext.destination);
+  oscillator.start();
+  oscillator.stop(audioContext.currentTime + duration);
+}
+
+function playRelinchoFake() {
+  beep(520, .12, 'sawtooth');
+  setTimeout(() => beep(760, .16, 'sawtooth'), 110);
+  setTimeout(() => beep(430, .22, 'square'), 240);
+}
+
+function playBoing() {
+  beep(260, .10, 'sine');
+  setTimeout(() => beep(680, .18, 'sine'), 90);
+}
+
+function playDrama() {
+  beep(220, .25, 'triangle');
+  setTimeout(() => beep(180, .35, 'triangle'), 260);
+  setTimeout(() => beep(140, .45, 'triangle'), 620);
+}
+
+function playTurbo() {
+  [180, 240, 320, 430, 560, 720].forEach((freq, index) => {
+    setTimeout(() => beep(freq, .08, 'square', .08), index * 70);
+  });
+}
+
+memeButton.addEventListener('click', () => {
+  const meme = randomItem(memes);
+  memeHorse.textContent = meme.emoji;
+  memeTitle.textContent = meme.title;
+  memeText.textContent = meme.text;
+  playBoing();
+});
+
+soundRelincho.addEventListener('click', playRelinchoFake);
+soundBoing.addEventListener('click', playBoing);
+soundDrama.addEventListener('click', playDrama);
+soundTurbo.addEventListener('click', playTurbo);
+
+chaosButton.addEventListener('click', () => {
+  memeStage.classList.toggle('chaos');
+  memeHorse.textContent = memeStage.classList.contains('chaos') ? '🐎' : '🐴';
+  memeTitle.textContent = memeStage.classList.contains('chaos') ? 'MODO CAOS ATIVADO' : 'Caos desligado';
+  memeText.textContent = memeStage.classList.contains('chaos')
+    ? 'Augusto hackeou o pasto. Carlos está negociando com uma cenoura.'
+    : 'O haras voltou ao normal... por enquanto.';
+  playTurbo();
+});
